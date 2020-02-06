@@ -1,0 +1,122 @@
+vue create my-project
+vue --version
+npm run dev
+npm uninstall vue-cli -g
+vue create my-project
+# OR
+vue ui
+
+npm run serve
+
+Sự kiện
+v-on:click
+v-on:keydown
+v-on:submit
+
+
+scaffold
+truyền dữ liệu bằng v-bind 
+lấy ra prop
+key-word : prop
+
+Local Registration Components :
+	Global Registration :
+		Vue.component('my-component-name', {
+		  // ... options ...
+		})
+	Local Registration :
+	var ComponentA = { /* ... */ }
+	var ComponentB = { /* ... */ }
+	var ComponentC = { /* ... */ }
+	
+	new Vue({
+		el: '#app',
+		components: {
+		appHeader : Header, // biên dịch thành app-header
+		Servers, // biên dịch thành severs
+		'component-a': ComponentA,
+		'component-b': ComponentB
+		}
+	})
+	
+template chỉ chứa 1 element duy nhất để nó coi đó là root-component	
+
+Ref : trỏ đến dom giống như việc đặt cho nó 1 cái id rồi gọi nó và sử dụng 
+<input ref="name">
+this.$refs.'name' : 
+29 Sử dụng Ref trong Vue (zend)
+
+<style scoped ></style> // tác động lên component chứ không toàn bộ hệ thống 
+
+-) v-model 'Modifiers' có .lazy dùng bind dữ liệu khi người dùng sang ô khác 
+
+
+trong <options> của thẻ <select> có thể dùng :selected dùng như thẻ selected trong khi viết html
+white-space:pre khi v-model vào thằng textarea không lưu khoảng trống thêm white-space:pre ở chỗ sử dụng
+
+khi không sử dụng v-model thì dùng  
+:value="tên biến"
+@input="tên biến = $event.target.value"  xem ở video :112 section 11
+
+Section 11 | Video 08 chuyển dữ liệu 2 chiều giữa các form 
+
+truyền dữ liệu component :
+
+có thể lưu dữ liệu thành 1 object chứa nhiều trường 
+slot :
+các slot không được định nghĩa là default slot.
+parent : <app-parent>html </app-parent> có thể khai bảo <p slot="a"> </p>
+child  : muốn dử dụng gọi <slot name="a"></slot>
+
+<component :is="name-component"></component> thay đổi component name-component thay đổi component sẽ thay đổi theo 
+
+keep-alive : vấn đề xảy ra khi chuyển đổi các component thì giá trị bên trong sẽ bị seset 
+đặt keep-alive sẽ đc lưu lại giá trị
+<keep-alive></keep-alive>
+activated va deactivated: cho phép kiểm soát việc bật tắt của keep-alive
+
+	Global API :https://vuejs.org/v2/api/#Global-API
+	+) Vue.filter( id, [definition] ) dùng định nghĩa fomat text :https://vuejs.org/v2/api/#Vue-filter
+
+Reusability & Composition (tái sử dụng thành phần ) :
+	mixins: dùng để viết 1 file riêng sau đó sử dụng chung cho các component :https://vuejs.org/v2/guide/mixins.html 
+	có thể viết ở bên myMixin sau đó ghi đè lên ở bên component
+	mixins chỉ dùng để chia sẻ , nếu nó nhận được dữ liệu thì những thằng kế thừa từ nó cũng không nhận được 
+	cách gọi : mixins: [myMixin] 
+	
+	+) Vue.directive( id, [definition] ) dùng để tạo mấy cái v-model,v-bind ... tương tự
+	
+Enter/Leave & List Transitions :
+<transitions> chứa 1 element </transitions> dùng để css xét chuyển dộng cho dom kết hợp vs v-if hoặc v-show
+muốn có hiệu ứng từ đầu  thêm appear vào transition đó : Section 14 | Video 05
+có 6 trạng thái https://vi.vuejs.org/v2/guide/transitions.html#Cac-class-transition
+sử dụng thêm thử viện animate.css có sẵn cho phép làm hiệu ứng  : https://vi.vuejs.org/v2/guide/transitions.html#Class-tuy-bien-cho-transition
+dùng :name ... để bind dữ liệu 2 chiều vào   
+
+	Vue Router : import thu vien router vao :npm install vue-router
+ tài liệu ở https://router.vuejs.org/
+ dùng để điều hướng trang web nhớ thêm  <router-view/> vào bên app.vue 
+	VD:	
+routers.js	
+// routes component
+import Home from './components/Home.vue'
+import home1 from './components/test/Home-1.vue'
+/*phải đặt là routes*/
+export const routes = [
+    {path:'/',name:'homepage', component:Home},
+    {path:'/home1',name:'home-1',component:home1}
+]
+
+main.js
+import VueRouter from 'vue-router'
+import {routes} from './routes.js'
+var router =new VueRouter({
+  routes
+})
+Vue.use(VueRouter)
+
+
+new Vue({
+  router,
+  render: h => h(App),
+}).$mount('#app')
