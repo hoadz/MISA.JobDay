@@ -1,4 +1,4 @@
-vue create my-project
+avue create my-project
 vue --version
 npm run dev
 npm uninstall vue-cli -g
@@ -21,7 +21,7 @@ key-word : prop
 
 Local Registration Components :
 	Global Registration :
-		Vue.component('my-component-name', {
+		Vue.component('my-component-name', {adasdsadadaadasd
 		  // ... options ...
 		})
 	Local Registration :
